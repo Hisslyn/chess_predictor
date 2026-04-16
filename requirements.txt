@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+pandas
+lxml
+tenacity
+sqlalchemy
+xgboost
+scikit-learn
+shap
+jupyter

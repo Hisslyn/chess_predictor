@@ -1,0 +1,55 @@
+========================================================================
+CHESS PERFORMANCE RATING PREDICTOR — TRAINING REPORT
+========================================================================
+
+TRAIN / TEST SPLIT
+  Train tournaments (8): 972588, 1051218, 1051224, 1054645, 1081512, 1082918, 1090879, 1092539
+  Test  tournaments (2):  1048010, 1090975
+  Train rows: 3918   Test rows: 318
+
+MODEL PERFORMANCE (MAE — lower is better)
+------------------------------------------------------------------------
+  Baseline 0  bracket mean Rp      MAE =   284.9
+  Baseline 1  Elo expected score   MAE =   263.3
+  XGBoost     all features          MAE =   209.5  ← best CV MAE 133.1
+
+  XGBoost beats Baseline 0 by +75.4  and Baseline 1 by +53.8
+
+BASELINE 0 — RATING BRACKET MEANS (from training set)
+------------------------------------------------------------------------
+  1500-1800     mean Rp = 1589.6
+  1800-2100     mean Rp = 1905.4
+  2100+         mean Rp = 2228.8
+  <1500         mean Rp = 1361.2
+
+XGBOOST BEST HYPERPARAMETERS
+------------------------------------------------------------------------
+  colsample_bytree       = 0.8119
+  gamma                  = 0.1209
+  learning_rate          = 0.0458
+  max_depth              = 6
+  min_child_weight       = 5
+  n_estimators           = 136
+  reg_alpha              = 0.8826
+  reg_lambda             = 0.8774
+  subsample              = 0.7115
+
+XGBOOST TOP-15 FEATURE IMPORTANCES (gain)
+------------------------------------------------------------------------
+   1. player_rating                        0.2991
+   2. tournament_avg_rating                0.1886
+   3. score_delta                          0.0687
+   4. rating_gap_to_field_avg              0.0376
+   5. field_size                           0.0344
+   6. seed_percentile                      0.0330
+   7. avg_opponent_rating_so_far           0.0294
+   8. current_score                        0.0293
+   9. current_rank                         0.0242
+  10. action_aggressive                    0.0241
+  11. action_passive                       0.0238
+  12. action_solid                         0.0223
+  13. expected_score_this_game             0.0214
+  14. opponent_rating                      0.0213
+  15. tournament_rating_std                0.0199
+
+========================================================================

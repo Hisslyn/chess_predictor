@@ -1,0 +1,111 @@
+CHESS.DB VALIDATION REPORT
+Database : data/interim/chess.db
+Thresholds: missing>10%  |z|>3.0
+
+  tournaments            :     10
+  players_in_tournament  :    889
+  games                  :   2401
+
+════════════════════════════════════════════════════════════════════════
+CHECK 1 · Missing / zero starting_rating
+════════════════════════════════════════════════════════════════════════
+  Flagged players : 69
+    tnr972588  (9. Internationales Bad Schwartauer Schachopen) : 12 players
+    tnr1048010  (Athens of the East 4th International Open FIDE Rat) : 1 players
+    tnr1051224  (9. Frankenthaler Weihnachtsopen B-Turnier) : 1 players
+    tnr1054645  (I Obert Festes de Nadal del Guinardó (Grup A)) : 2 players
+    tnr1081512  (2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURN) : 28 players
+    tnr1082918  (COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ ) : 19 players
+    tnr1090975  (London Christmas Congress - Major) : 5 players
+    tnr1092539  (8. HSK Weihnachts Open 2024) : 1 players
+  player_tournament_ids : [123, 229, 235, 246, 266, 268, 271, 273, 286, 287, 288, 289, 290, 291, 292, 293, 295, 298, 299, 300] …
+
+════════════════════════════════════════════════════════════════════════
+CHECK 2 · Missing performance_rating
+════════════════════════════════════════════════════════════════════════
+  Flagged players : 889
+  (performance_rating is currently NULL for all players —
+   will be populated in the feature-engineering step)
+
+════════════════════════════════════════════════════════════════════════
+CHECK 3 · DNF players (played fewer rounds than expected)
+════════════════════════════════════════════════════════════════════════
+  Flagged players : 521
+    tnr972588  (9. Internationales Bad Schwartauer Schachopen) : 15 DNFs
+    tnr1048010  (Athens of the East 4th International Open FIDE Rat) : 150 DNFs
+    tnr1051218  (9. Frankenthaler Weihnachtsopen A-Turnier) : 14 DNFs
+    tnr1051224  (9. Frankenthaler Weihnachtsopen B-Turnier) : 17 DNFs
+    tnr1054645  (I Obert Festes de Nadal del Guinardó (Grup A)) : 18 DNFs
+    tnr1081512  (2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURN) : 150 DNFs
+    tnr1082918  (COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ ) : 113 DNFs
+    tnr1090879  (RIZVANOĞLU MİMARLIK BURSA 4.ELO AÇIK ELO SATRANÇ T) : 14 DNFs
+    tnr1090975  (London Christmas Congress - Major) : 9 DNFs
+    tnr1092539  (8. HSK Weihnachts Open 2024) : 21 DNFs
+
+  Detail (first 20 rows):
+     player_tournament_id  tournament_id                    name  games_played  expected_games  shortfall
+                        1        1048010           Vishnu, Vijay             6               9          3
+                        2        1048010          Mani, Bharathy             6               9          3
+                        3        1048010           Kavinkumar, G             3               9          6
+                        4        1048010             Mithiran, A             3               9          6
+                        5        1048010            Srihari, K R             2               9          7
+                        6        1048010           Shawn, Pravin             2               9          7
+                        7        1048010         Arman, Siddique             1               9          8
+                        8        1048010             Ebin, Benny             5               9          4
+                        9        1048010      Dilip, Kumar Pedda             6               9          3
+                       10        1048010       Saurabh, Lokhande             6               9          3
+                       11        1048010 Niroshan, Thanikachalam             3               9          6
+                       12        1048010          Raghul, Saro S             1               9          8
+                       13        1048010             Anurag, M S             4               9          5
+                       14        1048010        Sahana, Shainsha             0               9          9
+                       15        1048010        Vigneshwaran, N.             5               9          4
+                       16        1048010       Caris, Jeshurun A             0               9          9
+                       17        1048010        Shanmukha, Pulli             0               9          9
+                       18        1048010 Chandra, Prakash Sankar             4               9          5
+                       19        1048010           Manoj, Guru R             0               9          9
+                       20        1048010         Paramasivam, M.             2               9          7
+
+════════════════════════════════════════════════════════════════════════
+CHECK 4 · Bye / forfeit games
+════════════════════════════════════════════════════════════════════════
+  Flagged games       : 154
+    NULL player ref   : 154
+    Non-standard result: 0
+  Result distribution :
+    '1-0'           : 979
+    '0-1'           : 906
+    '1/2-1/2'       : 516
+  Flagged game_ids    : [1, 2, 4, 7, 9, 11, 14, 21, 23, 25, 28, 32, 63, 64, 70, 71, 72, 78, 83, 94] …
+
+════════════════════════════════════════════════════════════════════════
+CHECK 5 · Tournaments with >10% missing-data players
+════════════════════════════════════════════════════════════════════════
+  Flagged tournaments : 4
+     tournament_id                                                                                    name  n_players  n_missing  missing_frac
+            972588                                           9. Internationales Bad Schwartauer Schachopen        113         12         0.106
+           1081512                                 2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURNAMENT        150         28         0.187
+           1082918 COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ 2.750.000\n - COMIENZA A LAS 14 Horas        150         19         0.127
+           1090975                                                       London Christmas Congress - Major         33          5         0.152
+
+════════════════════════════════════════════════════════════════════════
+CHECK 6 · Rating outliers (|z| > 3.0)
+════════════════════════════════════════════════════════════════════════
+  Flagged players : 3
+     player_tournament_id  tournament_id                                                         tournament_name                name  starting_rating    rtg_mean    rtg_std        z
+                      334        1090879 RIZVANOĞLU MİMARLIK BURSA 4.ELO AÇIK ELO SATRANÇ TURNUVASI A Kategorisi MARUFLU, ENES YUSUF           2182.0 1641.115385 148.995678 3.630203
+                      732         972588                           9. Internationales Bad Schwartauer Schachopen    Hausrath, Daniel           2460.0 1803.396040 191.384695 3.430807
+                      603        1051218                               9. Frankenthaler Weihnachtsopen A-Turnier     Carow, Johannes           2498.0 1993.510204 149.418473 3.376355
+
+════════════════════════════════════════════════════════════════════════
+SUMMARY
+════════════════════════════════════════════════════════════════════════
+  CHECK 1  missing starting_rating  :   69 players flagged
+  CHECK 2  missing performance_rating:  889 players flagged  (expected)
+  CHECK 3  DNF (incomplete rounds)  :  521 players flagged
+  CHECK 4  bye/forfeit games         :  154 games   flagged
+  CHECK 5  high-missing tournaments  :    4 tournaments flagged
+  CHECK 6  rating outliers           :    3 players flagged
+
+  Unique players flagged (any check) : 540
+  Clean players                      : 349 / 889
+  Clean games (excl. bye/forfeit)    : 2247 / 2401

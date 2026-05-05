@@ -41,19 +41,19 @@ The model has learned from thousands of real tournament games that your performa
 
 ## How Accurate Is It
 
-The model's predictions are off by about **210 rating points** on average when tested on tournaments it had never seen before.
+The model's predictions are off by about **94 rating points** on average when tested on tournaments it had never seen before.
 
 That sounds like a lot — but compare it to simpler methods:
 
 | Approach | Average error |
 |---|---|
-| "Just use your rating bracket's historical average" | 285 rating points |
-| "Use Elo math to predict your score" | 263 rating points |
-| **This model** | **210 rating points** |
+| "Just use your rating bracket's historical average" | 168 rating points |
+| "Use Elo math to predict your score" | 145 rating points |
+| **This model** | **94 rating points** |
 
-The model reduces prediction error by about **75 points** versus the simplest baseline and **54 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
+The model reduces prediction error by about **74 points** versus the simplest baseline and **50 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
 
-The model was tuned so that its cross-validated error (tested on data it was partially trained with) was even tighter: **133 rating points**. The gap between that and the 210 on held-out tournaments tells us there's still some overfitting — the model could improve with more training data.
+The model was tuned so that its cross-validated error (tested on data it was partially trained with) was even tighter: **89 rating points**. The gap between that and the 94 on held-out tournaments is small, which tells us the model generalises well — training on 150 tournaments gave it enough variety to avoid the overfitting we saw in earlier runs.
 
 ---
 
@@ -110,7 +110,7 @@ The result also includes a **confidence** field. "Strong" means the recommended 
 
 ## What Data It Learned From
 
-The model was trained on **10 Swiss tournaments** scraped from [chess-results.com](https://www.chess-results.com), covering **889 players** and **2,401 games**. The data includes tournaments from Germany, Argentina, India, Turkey, Spain, and the United Kingdom, all played around late 2024.
+The model was trained on **150 Swiss tournaments** scraped from [chess-results.com](https://www.chess-results.com), covering **10,253 players** and **37,186 games** across 66,594 player-round observations. The data includes tournaments from Germany, Argentina, India, Turkey, Spain, the United Kingdom, and beyond, spanning a wide range of rating levels and event sizes.
 
 For each player in each round, the data records their rating, their opponent's rating, their current score, their standing in the event, what color they had, and — crucially — whether their play in that round was closer to aggressive, solid, or passive (determined by how their actual result compared to what Elo math would predict).
 
@@ -120,7 +120,7 @@ The scraping was done automatically: the program searched chess-results.com for 
 
 ## Limitations
 
-- **Small training set.** Ten tournaments is a starting point, not a definitive study. Patterns from events in Germany and Argentina in late 2024 may not fully reflect club opens in other countries, time controls, or decades.
+- **Training coverage.** 150 tournaments is a meaningful dataset, but it is not exhaustive. Patterns learned from these events may not fully represent every time control, country, or rating band.
 
 - **The model suggests a *style*, not a *move*.** "Aggressive" means aiming for complex, fighting positions — it doesn't tell you which opening to play or how to handle a specific position. The actual chess is still up to you.
 
@@ -130,7 +130,7 @@ The scraping was done automatically: the program searched chess-results.com for 
 
 - **Only covers Swiss tournaments.** Round-robin events, team leagues, or online tournaments have different dynamics and are not represented in the training data.
 
-- **Prediction error is real.** The model is off by around 210 rating points on average in testing. Use the recommendation as one input to your thinking, not as a definitive answer.
+- **Prediction error is real.** The model is off by around 94 rating points on average in testing. Use the recommendation as one input to your thinking, not as a definitive answer.
 
 ---
 

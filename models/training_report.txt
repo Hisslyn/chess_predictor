@@ -3,24 +3,24 @@ CHESS PERFORMANCE RATING PREDICTOR — TRAINING REPORT
 ========================================================================
 
 TRAIN / TEST SPLIT
-  Train tournaments (8): 972588, 1051218, 1051224, 1054645, 1081512, 1082918, 1090879, 1092539
-  Test  tournaments (2):  1048010, 1090975
-  Train rows: 3918   Test rows: 318
+  Train tournaments (118): 873076, 929420, 929422, 957150, 972273, 972588, 996752, 996753, 1003801, 1012287, 1012300, 1022294, 1030746, 1048008, 1048010, 1051218, 1051224, 1054159, 1054456, 1058057, 1059715, 1060848, 1063384, 1065413, 1065682, 1066445, 1066451, 1067907, 1069751, 1070842, 1071465, 1072504, 1072528, 1073951, 1074691, 1075548, 1075628, 1078111, 1079021, 1080372, 1080926, 1081512, 1082511, 1082918, 1083477, 1084221, 1085560, 1086367, 1086869, 1087732, 1088341, 1089908, 1090223, 1090879, 1090975, 1090985, 1092539, 1094232, 1208374, 1210514, 1210515, 1235671, 1241551, 1242846, 1251766, 1254861, 1258957, 1262787, 1263715, 1266603, 1275253, 1277112, 1277319, 1277321, 1277404, 1277432, 1277433, 1277628, 1278459, 1287555, 1292777, 1293523, 1296999, 1299458, 1299610, 1300160, 1300604, 1300653, 1300791, 1301587, 1303926, 1307620, 1307978, 1308129, 1308176, 1308177, 1309599, 1310916, 1312432, 1313075, 1313571, 1313909, 1314104, 1316189, 1316550, 1317305, 1317970, 1319203, 1319270, 1319475, 1319828, 1321995, 1322060, 1323866, 1324037, 1324528, 1325119, 1325893
+  Test  tournaments (29):  976288, 1035587, 1053362, 1054645, 1066450, 1070226, 1070267, 1070759, 1072606, 1075546, 1077172, 1078355, 1084967, 1088394, 1090491, 1209676, 1213210, 1290636, 1292959, 1299309, 1302807, 1305306, 1306028, 1320076, 1321301, 1321838, 1322287, 1322314, 1322555
+  Train rows: 53946   Test rows: 12648
 
 MODEL PERFORMANCE (MAE — lower is better)
 ------------------------------------------------------------------------
-  Baseline 0  bracket mean Rp      MAE =   284.9
-  Baseline 1  Elo expected score   MAE =   263.3
-  XGBoost     all features          MAE =   209.5  ← best CV MAE 133.1
+  Baseline 0  bracket mean Rp      MAE =   168.1
+  Baseline 1  Elo expected score   MAE =   144.7
+  XGBoost     all features          MAE =    94.3  ← best CV MAE 88.5
 
-  XGBoost beats Baseline 0 by +75.4  and Baseline 1 by +53.8
+  XGBoost beats Baseline 0 by +73.8  and Baseline 1 by +50.3
 
 BASELINE 0 — RATING BRACKET MEANS (from training set)
 ------------------------------------------------------------------------
-  1500-1800     mean Rp = 1589.6
-  1800-2100     mean Rp = 1905.4
-  2100+         mean Rp = 2228.8
-  <1500         mean Rp = 1361.2
+  1500-1800     mean Rp = 1613.7
+  1800-2100     mean Rp = 1924.0
+  2100+         mean Rp = 2241.8
+  <1500         mean Rp = 1329.8
 
 XGBOOST BEST HYPERPARAMETERS
 ------------------------------------------------------------------------
@@ -36,20 +36,20 @@ XGBOOST BEST HYPERPARAMETERS
 
 XGBOOST TOP-15 FEATURE IMPORTANCES (gain)
 ------------------------------------------------------------------------
-   1. player_rating                        0.2991
-   2. tournament_avg_rating                0.1886
-   3. score_delta                          0.0687
-   4. rating_gap_to_field_avg              0.0376
-   5. field_size                           0.0344
-   6. seed_percentile                      0.0330
-   7. avg_opponent_rating_so_far           0.0294
-   8. current_score                        0.0293
-   9. current_rank                         0.0242
-  10. action_aggressive                    0.0241
-  11. action_passive                       0.0238
-  12. action_solid                         0.0223
-  13. expected_score_this_game             0.0214
-  14. opponent_rating                      0.0213
-  15. tournament_rating_std                0.0199
+   1. title_encoded                        0.3837
+   2. player_rating                        0.3420
+   3. score_delta                          0.0465
+   4. avg_opponent_rating_so_far           0.0273
+   5. rating_gap_to_field_avg              0.0238
+   6. tournament_avg_rating                0.0195
+   7. current_score                        0.0151
+   8. action_passive                       0.0146
+   9. action_aggressive                    0.0116
+  10. opponent_rating                      0.0115
+  11. action_solid                         0.0113
+  12. current_rank                         0.0104
+  13. expected_score_so_far                0.0103
+  14. gap_to_leader                        0.0099
+  15. expected_score_this_game             0.0092
 
 ========================================================================

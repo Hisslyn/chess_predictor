@@ -2,110 +2,357 @@ CHESS.DB VALIDATION REPORT
 Database : data/interim/chess.db
 Thresholds: missing>10%  |z|>3.0
 
-  tournaments            :     10
-  players_in_tournament  :    889
-  games                  :   2401
+  tournaments            :    150
+  players_in_tournament  :  10253
+  games                  :  37186
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 1 · Missing / zero starting_rating
 ════════════════════════════════════════════════════════════════════════
-  Flagged players : 69
+  Flagged players : 676
     tnr972588  (9. Internationales Bad Schwartauer Schachopen) : 12 players
+    tnr1012287  (Međunarodni Amaterski OPEN turnir "Alija Ikić 2024) : 4 players
+    tnr1012300  (Rapid turnir "Dan Sandžaka 2024",  nedelja, 29. de) : 3 players
+    tnr1035587  (Memoriál Ing. Olexy 2024) : 3 players
     tnr1048010  (Athens of the East 4th International Open FIDE Rat) : 1 players
     tnr1051224  (9. Frankenthaler Weihnachtsopen B-Turnier) : 1 players
+    tnr1053362  (ZIMSKI "FENIKS" OPEN BRANICEVSKOG OKRUGA 2024) : 5 players
+    tnr1054159  (53. MEĐUNARODNI ŠAHOVSKI TURNIR "BOSNA 2024") : 10 players
     tnr1054645  (I Obert Festes de Nadal del Guinardó (Grup A)) : 2 players
+    tnr1058057  (90o Campeonato Brasileiro Absoluto de Xadrez STD 2) : 23 players
+    tnr1059715  (2° GRAN ABIERTO ALICIA DE GUELMAN CLUB ARGENTINO D) : 7 players
+    tnr1066445  (Championship UKR Men`s 2024) : 11 players
+    tnr1067907  (III TORNEO IRT FUERZA DEL NORTE 2024) : 6 players
+    tnr1069751  (XXXIV Torneo Internacional Carlos Torre Repetto "I) : 2 players
+    tnr1070267  (Novogodisnji rapid SK Stari grad 2024) : 3 players
+    tnr1070759  (VI Open Internacional Ciutat de Vilanova) : 1 players
+    tnr1072504  (Відкритий чемпіонат Закарпатської області з швидки) : 3 players
+    tnr1072528  (Victory Day International Open Chess Tournament-20) : 20 players
+    tnr1073951  (NCC OPEN 2024 MASTERS) : 3 players
+    tnr1075546  (Festival Sudamericano de la Juventud - Categoria S) : 2 players
+    tnr1079021  (Grand Master 'Ziaur Rahman' Smriti 1st Internation) : 11 players
     tnr1081512  (2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURN) : 28 players
+    tnr1082511  (Guia es Deporte 2024 - Circuito de Canarias Activo) : 8 players
     tnr1082918  (COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ ) : 19 players
+    tnr1084221  (G.Lisitsyn Memorial 2024) : 3 players
+    tnr1084967  (Airforce Commander Open Section) : 11 players
+    tnr1085560  (29. Seniorsko Prvenstvo ŠSZDK za 2024. godinu) : 1 players
+    tnr1086869  (ФИНАЛ - Alliance-MTS Rapid (28-29 декабря, призово) : 2 players
+    tnr1088341  (28.12. Ústí n.L., rapid do FIDEela, 100 let klubu ) : 3 players
+    tnr1088394  (3. Lípácký rapid U Vacků - Silvestrovský turnaj) : 2 players
+    tnr1089908  (Up and Down Chess Tournament) : 16 players
+    tnr1090223  (WCF Ljubljana Rapid Challenge 2024) : 1 players
+    tnr1090491  (Karlstad Open 2024) : 10 players
     tnr1090975  (London Christmas Congress - Major) : 5 players
+    tnr1090985  (VI IRT Torneo Navideño de Ajedrez FUNCAEXP 2024 AT) : 8 players
     tnr1092539  (8. HSK Weihnachts Open 2024) : 1 players
-  player_tournament_ids : [123, 229, 235, 246, 266, 268, 271, 273, 286, 287, 288, 289, 290, 291, 292, 293, 295, 298, 299, 300] …
+    tnr1209676  (Rilton Open 2025/2026) : 8 players
+    tnr1213210  (3. OTVORENI MEĐUNARODNI ŠAHOVSKI TURNIR DUBROVNIK ) : 12 players
+    tnr1251766  (91o Campeonato Brasileiro Absoluto 2025) : 13 players
+    tnr1262787  (Wellness Chess Tour GP18 Záró rendezvény 2025. Dec) : 2 players
+    tnr1266603  (HSK-Weihachtsopen 2025) : 2 players
+    tnr1277112  (DICIEMBRE EN EL CLUB ARGENTINO Torneo OATD Alicia ) : 4 players
+    tnr1277319  (Međunarodni Amaterski OPEN turnir "Alija Ikić 2025) : 1 players
+    tnr1277321  (Rapid turnir "Dan Sandžaka 2025",  nedelja, 28. de) : 2 players
+    tnr1277404  (Praha - 21. 12. - 3. ročník Populus Open - zimní r) : 5 players
+    tnr1278459  (3. ročník O zlaté prasátko 2025) : 1 players
+    tnr1287555  (XVI OPEN INT. XADREZ MARQUÊS DE POMBAL) : 8 players
+    tnr1292959  (Torneo IRT Clásico Navideno Bogotá DC) : 18 players
+    tnr1293523  (Hegedus-Kantor emlekverseny Mezőkövesd 2025-12.27-) : 4 players
+    tnr1300791  (Brazil Chess Series - Sao Paulo 2025) : 8 players
+    tnr1301587  (▄▀ ТРОФЕЈ СМЕДЕРЕВСКА ПАЛАНКА 2025 (21.децембар, н) : 6 players
+    tnr1305306  (Championship UKR Men`s 2025) : 12 players
+    tnr1306028  (Championship UKR Men`s 2025 - Rapid) : 1 players
+    tnr1306068  (Чемпіонат України з шахів серед жінок (класичні) -) : 31 players
+    tnr1306069  (Чемпіонат України з шахів (класичні) - 2025) : 125 players
+    tnr1307620  (ZAVRŠNI TURNIR ŠAHOVSKE SEKCIJE SABA RH 2025.) : 2 players
+    tnr1308129  (Chess Hub-Pahang Year End Invitational Tournament ) : 1 players
+    tnr1308176  (I MEMORIJALNI ŠAHOVSKI TURNIR "EJUP MURATOVIĆ" Dug) : 3 players
+    tnr1308177  (VII Open Internacional Ciutat de Vilanova -  45471) : 1 players
+    tnr1310916  (III TORNEO INTERNACIONAL VEGA DE SAN MATEO) : 4 players
+    tnr1312432  (10th Johor International Chess Open 2025) : 1 players
+    tnr1313909  (MEMORIJAL VOJKANA PETROVICA 2025) : 9 players
+    tnr1314104  (PSC-NCFP Selection National Chess Championship Sem) : 8 players
+    tnr1314460  ("Зимові свята в Авангарді" Турнір А (кмсУ та Перши) : 47 players
+    tnr1316189  (Prvenstvo grada Čačka 2025) : 7 players
+    tnr1316550  (17th Penang Heritage City International Chess Open) : 2 players
+    tnr1317305  (2025 NATIONAL CHESS CHAMPIONSHIP - OPEN) : 1 players
+    tnr1319475  (17th Grand Prix 2025 'Before the New Year', by SOX) : 1 players
+    tnr1319828  (5. Lípácký rapid U Vacků - Silvestrovský turnaj) : 2 players
+    tnr1320076  (Bye Bye 2025 #XADREZNOBURGUES 54ª Edição Torneio X) : 2 players
+    tnr1321838  (Turneu i III-të i Shahut “Tearca 2025”) : 13 players
+    tnr1321995  (IRT Torneo de Ajedrez Rapido Feria de Cali 2025) : 18 players
+    tnr1322060  (2nd Annual Loft Open Chess Championship - Open Sec) : 9 players
+    tnr1322314  (Tradicionalni Novogodišnji turnir Od kina do benzi) : 3 players
+    tnr1322555  (Ya. D. Zinder Memorial 2025_rapid) : 4 players
+    tnr1324037  (Мемориал В.В. Осноса-2025) : 4 players
+    tnr1324528  (Karlstad Open 2025) : 6 players
+    tnr1325119  (Rapid Moscow. December 2025 - 3) : 4 players
+    tnr1325893  (The 17th Cultural and Sports Olympiad for Iranian ) : 10 players
+  player_tournament_ids : [1012, 1118, 1124, 1135, 1155, 1157, 1160, 1162, 1175, 1176, 1177, 1178, 1179, 1180, 1181, 1182, 1184, 1187, 1188, 1189] …
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 2 · Missing performance_rating
 ════════════════════════════════════════════════════════════════════════
-  Flagged players : 889
+  Flagged players : 10253
   (performance_rating is currently NULL for all players —
    will be populated in the feature-engineering step)
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 3 · DNF players (played fewer rounds than expected)
 ════════════════════════════════════════════════════════════════════════
-  Flagged players : 521
+  Flagged players : 3859
+    tnr873076  (BASEL XMAS FESTIVAL 2024 - MASTER (min 2050 Elo)) : 16 DNFs
+    tnr929420  (Chessfestival Groningen 2024 Open A) : 17 DNFs
+    tnr929422  (Chessfestival Groningen 2024 Open B) : 16 DNFs
+    tnr957150  (XI SUNWAY SITGES INTERNATIONAL CHESS FESTIVAL 2024) : 135 DNFs
+    tnr972273  (XIII Festival Internacional LORCA, 26-30 Diciembre) : 35 DNFs
     tnr972588  (9. Internationales Bad Schwartauer Schachopen) : 15 DNFs
+    tnr976288  (Wiener Advent Open 2024 Gruppe A) : 27 DNFs
+    tnr996752  (X. Berecz Memorial Group A) : 6 DNFs
+    tnr996753  (X. Berecz Memorial Group B) : 7 DNFs
+    tnr1003801  (48. Zürcher Weihnachtsopen Meister) : 6 DNFs
+    tnr1012287  (Međunarodni Amaterski OPEN turnir "Alija Ikić 2024) : 14 DNFs
+    tnr1012300  (Rapid turnir "Dan Sandžaka 2024",  nedelja, 29. de) : 13 DNFs
+    tnr1022294  (Weekend Sahist Bucurestean 61 (27-29 decembrie 202) : 18 DNFs
+    tnr1030746  (Athens of the East 4th International Grand Master ) : 85 DNFs
+    tnr1035587  (Memoriál Ing. Olexy 2024) : 10 DNFs
+    tnr1048008  (Athens of the East 4th International Open FIDE Rat) : 150 DNFs
     tnr1048010  (Athens of the East 4th International Open FIDE Rat) : 150 DNFs
     tnr1051218  (9. Frankenthaler Weihnachtsopen A-Turnier) : 14 DNFs
     tnr1051224  (9. Frankenthaler Weihnachtsopen B-Turnier) : 17 DNFs
+    tnr1053362  (ZIMSKI "FENIKS" OPEN BRANICEVSKOG OKRUGA 2024) : 17 DNFs
+    tnr1054159  (53. MEĐUNARODNI ŠAHOVSKI TURNIR "BOSNA 2024") : 24 DNFs
+    tnr1054456  (Турнир A - Winter Cup 2024 (ТОО "Альянс МТС" -  пр) : 26 DNFs
     tnr1054645  (I Obert Festes de Nadal del Guinardó (Grup A)) : 18 DNFs
+    tnr1058057  (90o Campeonato Brasileiro Absoluto de Xadrez STD 2) : 87 DNFs
+    tnr1059715  (2° GRAN ABIERTO ALICIA DE GUELMAN CLUB ARGENTINO D) : 53 DNFs
+    tnr1060848  (Asian Amateur Chess Championships 2024 - Men U2000) : 15 DNFs
+    tnr1063384  (Skopje OPEN 2024 - A) : 38 DNFs
+    tnr1065413  (XXXIV Torneo Internacional Carlos Torre Repetto "I) : 10 DNFs
+    tnr1065682  (ODISHA OPEN - Category 'A' (1900 & above) #  (The ) : 112 DNFs
+    tnr1066445  (Championship UKR Men`s 2024) : 14 DNFs
+    tnr1066450  (Чемпіонат України з шахів (класичні шахи)) : 14 DNFs
+    tnr1066451  (Чемпіонат України з шахів (класичні шахи) серед жі) : 10 DNFs
+    tnr1067907  (III TORNEO IRT FUERZA DEL NORTE 2024) : 12 DNFs
+    tnr1069751  (XXXIV Torneo Internacional Carlos Torre Repetto "I) : 31 DNFs
+    tnr1070226  (3rd Alamto Cup International Chess Festival A) : 18 DNFs
+    tnr1070267  (Novogodisnji rapid SK Stari grad 2024) : 5 DNFs
+    tnr1070759  (VI Open Internacional Ciutat de Vilanova) : 18 DNFs
+    tnr1070842  (#XADREZNOBURGUES XLIII - Torneio Aberto Xadrez LBX) : 10 DNFs
+    tnr1071465  (3rd Alamto Cup International Chess Festival B Ilam) : 29 DNFs
+    tnr1072504  (Відкритий чемпіонат Закарпатської області з швидки) : 8 DNFs
+    tnr1072528  (Victory Day International Open Chess Tournament-20) : 133 DNFs
+    tnr1072606  (33. Aschacher Donau Open Gruppe A) : 19 DNFs
+    tnr1073951  (NCC OPEN 2024 MASTERS) : 21 DNFs
+    tnr1075546  (Festival Sudamericano de la Juventud - Categoria S) : 6 DNFs
+    tnr1075548  (Festival Sudamericano de la Juventud - Categoria S) : 4 DNFs
+    tnr1075628  (Prvenstvo Osijeka 2024) : 10 DNFs
+    tnr1077172  (Budapest Winter Classic Rapid december 29.) : 7 DNFs
+    tnr1078111  (Torneo IRT Internacional Santiago de Cali ELO Mayo) : 17 DNFs
+    tnr1078355  (Зимові свята в Авангарді - турнір А (1 розряди та ) : 8 DNFs
+    tnr1079021  (Grand Master 'Ziaur Rahman' Smriti 1st Internation) : 19 DNFs
+    tnr1080372  (108th Edward Lasker Memorial and Marshall Chess Cl) : 37 DNFs
     tnr1081512  (2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURN) : 150 DNFs
+    tnr1082511  (Guia es Deporte 2024 - Circuito de Canarias Activo) : 4 DNFs
     tnr1082918  (COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ ) : 113 DNFs
+    tnr1083477  (International Tashkent Chess Festival -"MASTERS") : 26 DNFs
+    tnr1084221  (G.Lisitsyn Memorial 2024) : 26 DNFs
+    tnr1084967  (Airforce Commander Open Section) : 48 DNFs
+    tnr1085560  (29. Seniorsko Prvenstvo ŠSZDK za 2024. godinu) : 2 DNFs
+    tnr1086367  (SUBOTICA  SahArt  RAPID  finale za 2024) : 1 DNFs
+    tnr1086869  (ФИНАЛ - Alliance-MTS Rapid (28-29 декабря, призово) : 9 DNFs
+    tnr1088341  (28.12. Ústí n.L., rapid do FIDEela, 100 let klubu ) : 2 DNFs
+    tnr1089908  (Up and Down Chess Tournament) : 9 DNFs
+    tnr1090223  (WCF Ljubljana Rapid Challenge 2024) : 3 DNFs
+    tnr1090491  (Karlstad Open 2024) : 31 DNFs
     tnr1090879  (RIZVANOĞLU MİMARLIK BURSA 4.ELO AÇIK ELO SATRANÇ T) : 14 DNFs
     tnr1090975  (London Christmas Congress - Major) : 9 DNFs
     tnr1092539  (8. HSK Weihnachts Open 2024) : 21 DNFs
+    tnr1094232  (BASEL XMAS FESTIVAL 2025- MASTER (min 2000 Elo Fid) : 25 DNFs
+    tnr1208374  (ADVENTSKI ŠAHOVSKI FESTIVAL 2025- CRIKVENICA OPEN ) : 15 DNFs
+    tnr1209676  (Rilton Open 2025/2026) : 8 DNFs
+    tnr1210514  (Chessfestival Groningen 2025 Open A) : 13 DNFs
+    tnr1210515  (Chessfestival Groningen 2025 Open B) : 23 DNFs
+    tnr1213210  (3. OTVORENI MEĐUNARODNI ŠAHOVSKI TURNIR DUBROVNIK ) : 21 DNFs
+    tnr1235671  (Hong Kong International Open 2025 - Open) : 25 DNFs
+    tnr1241551  (XI. Dr. Berecz Arpad Memorial Group "A" (Rating ov) : 14 DNFs
+    tnr1242846  (XI. Dr. Berecz Arpad Memorial Group "B" (Rating li) : 7 DNFs
+    tnr1251766  (91o Campeonato Brasileiro Absoluto 2025) : 41 DNFs
+    tnr1254861  (FINAL SUB2000 CAMPEONATO ARGENTINO DE AJEDREZ SOCI) : 13 DNFs
+    tnr1258957  (XII SUNWAY SITGES INTERNATIONAL CHESS FESTIVAL 202) : 125 DNFs
+    tnr1262787  (Wellness Chess Tour GP18 Záró rendezvény 2025. Dec) : 14 DNFs
+    tnr1263715  (49. Zürcher Weihnachtsopen Meisterturnier) : 10 DNFs
+    tnr1266603  (HSK-Weihachtsopen 2025) : 28 DNFs
+    tnr1275253  (10. Frankenthaler Weihnachtsopen A-Turnier) : 24 DNFs
+    tnr1277112  (DICIEMBRE EN EL CLUB ARGENTINO Torneo OATD Alicia ) : 57 DNFs
+    tnr1277319  (Međunarodni Amaterski OPEN turnir "Alija Ikić 2025) : 15 DNFs
+    tnr1277321  (Rapid turnir "Dan Sandžaka 2025",  nedelja, 28. de) : 7 DNFs
+    tnr1277404  (Praha - 21. 12. - 3. ročník Populus Open - zimní r) : 8 DNFs
+    tnr1277432  (Athens of the East 5th International Grandmaster O) : 51 DNFs
+    tnr1277433  (Athens of the East 5th International Grandmaster O) : 150 DNFs
+    tnr1277628  (IV Gran Clasico Armagedon) : 30 DNFs
+    tnr1278459  (3. ročník O zlaté prasátko 2025) : 8 DNFs
+    tnr1287555  (XVI OPEN INT. XADREZ MARQUÊS DE POMBAL) : 19 DNFs
+    tnr1290636  (M.Botvinnik Cup 2025 B Group) : 11 DNFs
+    tnr1292777  (34. Aschacher Donau Open Gruppe A) : 24 DNFs
+    tnr1292959  (Torneo IRT Clásico Navideno Bogotá DC) : 72 DNFs
+    tnr1293523  (Hegedus-Kantor emlekverseny Mezőkövesd 2025-12.27-) : 5 DNFs
+    tnr1296999  (KULA - Rapid turnir "Memorijal Momcilo Babic" 21de) : 6 DNFs
+    tnr1299309  (Grand-Open in "Galeria", Stage 3) : 10 DNFs
+    tnr1299458  (⛔Međunarodni amaterski turnir u šahu ,,RADNIČKI 20) : 32 DNFs
+    tnr1299610  (XXXV Torneo Internacional de Ajedrez "Carlos Torre) : 21 DNFs
+    tnr1300160  (34. NAPRETKOV BOŽIĆNI TURNIR) : 9 DNFs
+    tnr1300604  (Campeonato Alagoano Absoluto 2025 !!) : 28 DNFs
+    tnr1300653  (XXXV Torneo Internacional de Ajedrez "Carlos Torre) : 17 DNFs
+    tnr1300791  (Brazil Chess Series - Sao Paulo 2025) : 22 DNFs
+    tnr1301587  (▄▀ ТРОФЕЈ СМЕДЕРЕВСКА ПАЛАНКА 2025 (21.децембар, н) : 122 DNFs
+    tnr1302807  (20 ýaşa çenli oglanlaryň arasynda Türkmenistanyň b) : 11 DNFs
+    tnr1303926  (Суперкубок ЦАО-2025 по быстрым шахматам) : 3 DNFs
+    tnr1305306  (Championship UKR Men`s 2025) : 15 DNFs
+    tnr1306028  (Championship UKR Men`s 2025 - Rapid) : 86 DNFs
+    tnr1306068  (Чемпіонат України з шахів серед жінок (класичні) -) : 7 DNFs
+    tnr1306069  (Чемпіонат України з шахів (класичні) - 2025) : 15 DNFs
+    tnr1307620  (ZAVRŠNI TURNIR ŠAHOVSKE SEKCIJE SABA RH 2025.) : 7 DNFs
+    tnr1307978  (Рождественские встречи в Орше) : 12 DNFs
+    tnr1308129  (Chess Hub-Pahang Year End Invitational Tournament ) : 15 DNFs
+    tnr1308176  (I MEMORIJALNI ŠAHOVSKI TURNIR "EJUP MURATOVIĆ" Dug) : 6 DNFs
+    tnr1308177  (VII Open Internacional Ciutat de Vilanova -  45471) : 18 DNFs
+    tnr1309599  (II Obert Festes de Nadal del Guinardó (Grup A)) : 15 DNFs
+    tnr1310916  (III TORNEO INTERNACIONAL VEGA DE SAN MATEO) : 29 DNFs
+    tnr1312432  (10th Johor International Chess Open 2025) : 30 DNFs
+    tnr1313075  (FIDE Women’s World Rapid Championship 2025) : 11 DNFs
+    tnr1313571  (XLVI Metropolitano Torneo Internacional 2025 A) : 11 DNFs
+    tnr1313909  (MEMORIJAL VOJKANA PETROVICA 2025) : 28 DNFs
+    tnr1314104  (PSC-NCFP Selection National Chess Championship Sem) : 34 DNFs
+    tnr1314460  ("Зимові свята в Авангарді" Турнір А (кмсУ та Перши) : 24 DNFs
+    tnr1316189  (Prvenstvo grada Čačka 2025) : 9 DNFs
+    tnr1316550  (17th Penang Heritage City International Chess Open) : 18 DNFs
+    tnr1317970  (Kulttuuri-Shakki-58:n jouluturnaus) : 3 DNFs
+    tnr1319203  (SERKAN KONEZ AÇIK ELO SATRANÇ TURNUVASI A Kategori) : 17 DNFs
+    tnr1319270  (109th Edward Lasker Memorial - Marshall Chess Club) : 63 DNFs
+    tnr1319828  (5. Lípácký rapid U Vacků - Silvestrovský turnaj) : 9 DNFs
+    tnr1320076  (Bye Bye 2025 #XADREZNOBURGUES 54ª Edição Torneio X) : 10 DNFs
+    tnr1321301  (Гандикап-турнир "Встреча поколений") : 8 DNFs
+    tnr1321838  (Turneu i III-të i Shahut “Tearca 2025”) : 17 DNFs
+    tnr1321995  (IRT Torneo de Ajedrez Rapido Feria de Cali 2025) : 33 DNFs
+    tnr1322060  (2nd Annual Loft Open Chess Championship - Open Sec) : 23 DNFs
+    tnr1322287  (Championship UKR Women 2025 - Rapid) : 9 DNFs
+    tnr1322314  (Tradicionalni Novogodišnji turnir Od kina do benzi) : 9 DNFs
+    tnr1322555  (Ya. D. Zinder Memorial 2025_rapid) : 6 DNFs
+    tnr1324037  (Мемориал В.В. Осноса-2025) : 6 DNFs
+    tnr1324528  (Karlstad Open 2025) : 11 DNFs
+    tnr1325119  (Rapid Moscow. December 2025 - 3) : 4 DNFs
+    tnr1325893  (The 17th Cultural and Sports Olympiad for Iranian ) : 28 DNFs
 
   Detail (first 20 rows):
      player_tournament_id  tournament_id                    name  games_played  expected_games  shortfall
-                        1        1048010           Vishnu, Vijay             6               9          3
-                        2        1048010          Mani, Bharathy             6               9          3
-                        3        1048010           Kavinkumar, G             3               9          6
-                        4        1048010             Mithiran, A             3               9          6
-                        5        1048010            Srihari, K R             2               9          7
-                        6        1048010           Shawn, Pravin             2               9          7
-                        7        1048010         Arman, Siddique             1               9          8
-                        8        1048010             Ebin, Benny             5               9          4
-                        9        1048010      Dilip, Kumar Pedda             6               9          3
-                       10        1048010       Saurabh, Lokhande             6               9          3
-                       11        1048010 Niroshan, Thanikachalam             3               9          6
-                       12        1048010          Raghul, Saro S             1               9          8
-                       13        1048010             Anurag, M S             4               9          5
-                       14        1048010        Sahana, Shainsha             0               9          9
-                       15        1048010        Vigneshwaran, N.             5               9          4
-                       16        1048010       Caris, Jeshurun A             0               9          9
-                       17        1048010        Shanmukha, Pulli             0               9          9
-                       18        1048010 Chandra, Prakash Sankar             4               9          5
-                       19        1048010           Manoj, Guru R             0               9          9
-                       20        1048010         Paramasivam, M.             2               9          7
+                      890        1048010           Vishnu, Vijay             6               9          3
+                      891        1048010          Mani, Bharathy             6               9          3
+                      892        1048010           Kavinkumar, G             3               9          6
+                      893        1048010             Mithiran, A             3               9          6
+                      894        1048010            Srihari, K R             2               9          7
+                      895        1048010           Shawn, Pravin             2               9          7
+                      896        1048010         Arman, Siddique             1               9          8
+                      897        1048010             Ebin, Benny             5               9          4
+                      898        1048010      Dilip, Kumar Pedda             6               9          3
+                      899        1048010       Saurabh, Lokhande             6               9          3
+                      900        1048010 Niroshan, Thanikachalam             3               9          6
+                      901        1048010          Raghul, Saro S             1               9          8
+                      902        1048010             Anurag, M S             4               9          5
+                      903        1048010        Sahana, Shainsha             0               9          9
+                      904        1048010        Vigneshwaran, N.             5               9          4
+                      905        1048010       Caris, Jeshurun A             0               9          9
+                      906        1048010        Shanmukha, Pulli             0               9          9
+                      907        1048010 Chandra, Prakash Sankar             4               9          5
+                      908        1048010           Manoj, Guru R             0               9          9
+                      909        1048010         Paramasivam, M.             2               9          7
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 4 · Bye / forfeit games
 ════════════════════════════════════════════════════════════════════════
-  Flagged games       : 154
-    NULL player ref   : 154
+  Flagged games       : 595
+    NULL player ref   : 595
     Non-standard result: 0
   Result distribution :
-    '1-0'           : 979
-    '0-1'           : 906
-    '1/2-1/2'       : 516
-  Flagged game_ids    : [1, 2, 4, 7, 9, 11, 14, 21, 23, 25, 28, 32, 63, 64, 70, 71, 72, 78, 83, 94] …
+    '1-0'           : 15547
+    '0-1'           : 13432
+    '1/2-1/2'       : 8207
+  Flagged game_ids    : [2402, 2403, 2405, 2408, 2410, 2412, 2415, 2422, 2424, 2426, 2429, 2433, 2464, 2465, 2471, 2472, 2473, 2479, 2484, 2495] …
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 5 · Tournaments with >10% missing-data players
 ════════════════════════════════════════════════════════════════════════
-  Flagged tournaments : 4
-     tournament_id                                                                                    name  n_players  n_missing  missing_frac
-            972588                                           9. Internationales Bad Schwartauer Schachopen        113         12         0.106
-           1081512                                 2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURNAMENT        150         28         0.187
-           1082918 COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ 2.750.000\n - COMIENZA A LAS 14 Horas        150         19         0.127
-           1090975                                                       London Christmas Congress - Major         33          5         0.152
+  Flagged tournaments : 30
+     tournament_id                                                                                                                        name  n_players  n_missing  missing_frac
+            972588                                                                               9. Internationales Bad Schwartauer Schachopen        113         12         0.106
+           1054159                                                                                53. MEĐUNARODNI ŠAHOVSKI TURNIR "BOSNA 2024"         61         10         0.164
+           1058057                                                                       90o Campeonato Brasileiro Absoluto de Xadrez STD 2024        150         23         0.153
+           1067907                                                                                        III TORNEO IRT FUERZA DEL NORTE 2024         35          6         0.171
+           1072528                                                                        Victory Day International Open Chess Tournament-2024        150         20         0.133
+           1079021                             Grand Master 'Ziaur Rahman' Smriti 1st Internationl Fide Rating Chess Tournament Jhenaidah 2024         71         11         0.155
+           1081512                                                                     2ND KG MARAR MEMORIAL BELOW 1700 FIDE RATING TOURNAMENT        150         28         0.187
+           1082511                                                                          Guia es Deporte 2024 - Circuito de Canarias Activo         64          8         0.125
+           1082918                                     COPA SANDRO MARECO - PROTEGEN BOLSA DE PREMIOS: $ 2.750.000\n - COMIENZA A LAS 14 Horas        150         19         0.127
+           1084967                                                                                             Airforce Commander Open Section         95         11         0.116
+           1089908                                                                                                Up and Down Chess Tournament         93         16         0.172
+           1090975                                                                                           London Christmas Congress - Major         33          5         0.152
+           1090985                                                                         VI IRT Torneo Navideño de Ajedrez FUNCAEXP 2024 ATL         68          8         0.118
+           1209676                                                                                                       Rilton Open 2025/2026         63          8         0.127
+           1213210 3. OTVORENI MEĐUNARODNI ŠAHOVSKI TURNIR DUBROVNIK ADVENT 2025 Dubrovnik, Valamar Lacroma Dubrovnik Hotel, 18.12-21.12.2025.         95         12         0.126
+           1277404                                                               Praha - 21. 12. - 3. ročník Populus Open - zimní rapid turnaj         45          5         0.111
+           1287555                                                                                      XVI OPEN INT. XADREZ MARQUÊS DE POMBAL         62          8         0.129
+           1292959                                                                                       Torneo IRT Clásico Navideno Bogotá DC        129         18         0.140
+           1293523                                                                       Hegedus-Kantor emlekverseny Mezőkövesd 2025-12.27-29.         32          4         0.125
+           1300791                                                                                        Brazil Chess Series - Sao Paulo 2025         47          8         0.170
+           1306068                                                                     Чемпіонат України з шахів серед жінок (класичні) - 2025         31         31         1.000
+           1306069                                                                                 Чемпіонат України з шахів (класичні) - 2025        125        125         1.000
+           1313909                                                                                            MEMORIJAL VOJKANA PETROVICA 2025         61          9         0.148
+           1314104                                                    PSC-NCFP Selection National Chess Championship Semifinals Men's Division         52          8         0.154
+           1314460                                                                 "Зимові свята в Авангарді" Турнір А (кмсУ та Перший розряд)         47         47         1.000
+           1316189                                                                                                  Prvenstvo grada Čačka 2025         39          7         0.179
+           1321838                                                                                      Turneu i III-të i Shahut “Tearca 2025”         79         13         0.165
+           1321995                                                                             IRT Torneo de Ajedrez Rapido Feria de Cali 2025        122         18         0.148
+           1322060                                                                      2nd Annual Loft Open Chess Championship - Open Section         57          9         0.158
+           1325893                                                  The 17th Cultural and Sports Olympiad for Iranian Male Students (R1 Rapid)         51         10         0.196
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 6 · Rating outliers (|z| > 3.0)
 ════════════════════════════════════════════════════════════════════════
-  Flagged players : 3
-     player_tournament_id  tournament_id                                                         tournament_name                name  starting_rating    rtg_mean    rtg_std        z
-                      334        1090879 RIZVANOĞLU MİMARLIK BURSA 4.ELO AÇIK ELO SATRANÇ TURNUVASI A Kategorisi MARUFLU, ENES YUSUF           2182.0 1641.115385 148.995678 3.630203
-                      732         972588                           9. Internationales Bad Schwartauer Schachopen    Hausrath, Daniel           2460.0 1803.396040 191.384695 3.430807
-                      603        1051218                               9. Frankenthaler Weihnachtsopen A-Turnier     Carow, Johannes           2498.0 1993.510204 149.418473 3.376355
+  Flagged players : 21
+     player_tournament_id  tournament_id                                                                                                                           tournament_name                          name  starting_rating    rtg_mean    rtg_std         z
+                     7177        1022294                                                        Weekend Sahist Bucurestean 61 (27-29 decembrie 2024) Hotel MyContinental Bucuresti          Mesca, Teodor-Stefan            712.0 1817.592593 255.986108 -4.318955
+                     3613        1300604                                                                                                      Campeonato Alagoano Absoluto 2025 !! Neto, Jayme Amorim De Miranda           2211.0 1829.346154  91.810308  4.156983
+                    11141        1074691                                                                                               FIDE Women’s World Rapid Championships 2024     Naisanga, Sheba Valentine           1626.0 2251.081818 162.099931 -3.856151
+                     1223        1090879                                                                   RIZVANOĞLU MİMARLIK BURSA 4.ELO AÇIK ELO SATRANÇ TURNUVASI A Kategorisi           MARUFLU, ENES YUSUF           2182.0 1641.115385 148.995678  3.630203
+                    10584        1070842                             #XADREZNOBURGUES XLIII - Torneio Aberto Xadrez LBX O Burguês Hamburgueiria  Bairro Sudoeste - DF Bye bye 2024           CUNHA, LUCAS AGUIAR           2550.0 1891.500000 184.723772  3.564782
+                     3139        1277433                                                Athens of the East 5th International Grandmaster Open Chess tournament (Category -B B2000)                      Gokul, P           1461.0 1798.346667  95.263322 -3.541202
+                     1621         972588                                                                                             9. Internationales Bad Schwartauer Schachopen              Hausrath, Daniel           2460.0 1803.396040 191.384695  3.430807
+                     9224        1079021                                           Grand Master 'Ziaur Rahman' Smriti 1st Internationl Fide Rating Chess Tournament Jhenaidah 2024           Syed Maisha, Mahfuz           1428.0 1841.350000 120.614785 -3.427026
+                     1492        1051218                                                                                                 9. Frankenthaler Weihnachtsopen A-Turnier               Carow, Johannes           2498.0 1993.510204 149.418473  3.376355
+                     6243        1313075                                                                                                FIDE Women’s World Rapid Championship 2025 Abrar, Mohammed Ahmad Almalki           1594.0 2196.666667 180.675031 -3.335639
+                     3446        1277319                                                                      Međunarodni Amaterski OPEN turnir "Alija Ikić 2025", 22-26. decembar              Gulmaya, Timucin           1441.0 2101.609756 198.726556 -3.324215
+                     9301        1072528                                                                                      Victory Day International Open Chess Tournament-2024              Manon, Reja Neer           2429.0 1822.615385 187.149958  3.240100
+                     3134        1277433                                                Athens of the East 5th International Grandmaster Open Chess tournament (Category -B B2000)          Anusha, Chakravarthy           1490.0 1798.346667  95.263322 -3.236783
+                     5983        1320076 Bye Bye 2025 #XADREZNOBURGUES 54ª Edição Torneio Xadrez LBX  O Burguês Hamburgueiria Bairro Sudoeste - DF Neste Sábado 27/12/2025 as 15h.       DE SIQUEIRA, LUIGY LIRA           2537.0 1946.137931 185.082747  3.192421
+                     5748        1321838                                                                                                    Turneu i III-të i Shahut “Tearca 2025”            Nikolovski, Nikola           2370.0 1805.969697 177.275706  3.181656
+                     6766        1300160                                                                                                              34. NAPRETKOV BOŽIĆNI TURNIR                 Trebo, Sumeja           1456.0 2131.017544 212.161200 -3.181626
+                     3171        1277433                                                Athens of the East 5th International Grandmaster Open Chess tournament (Category -B B2000)                  Kamarajan, B           1498.0 1798.346667  95.263322 -3.152805
+                     6371        1306028                                                                                                       Championship UKR Men`s 2025 - Rapid              Kravtsiv, Martyn           2642.0 2001.208054 208.239119  3.077193
+                     7602        1078111                                                                               Torneo IRT Internacional Santiago de Cali ELO Mayor de 2000 Narvaez Hurtado, Miguel Angel           1488.0 1986.306122 162.651366 -3.063645
+                     3583        1317305                                                                                                   2025 NATIONAL CHESS CHAMPIONSHIP - OPEN                 MWALE, JOSEPH           2272.0 1911.000000 118.172090  3.054867
+                     6237        1313075                                                                                                FIDE Women’s World Rapid Championship 2025            Al-Khulaifi, Ghada           1650.0 2196.666667 180.675031 -3.025690
 
 ════════════════════════════════════════════════════════════════════════
 SUMMARY
 ════════════════════════════════════════════════════════════════════════
-  CHECK 1  missing starting_rating  :   69 players flagged
-  CHECK 2  missing performance_rating:  889 players flagged  (expected)
-  CHECK 3  DNF (incomplete rounds)  :  521 players flagged
-  CHECK 4  bye/forfeit games         :  154 games   flagged
-  CHECK 5  high-missing tournaments  :    4 tournaments flagged
-  CHECK 6  rating outliers           :    3 players flagged
+  CHECK 1  missing starting_rating  :  676 players flagged
+  CHECK 2  missing performance_rating: 10253 players flagged  (expected)
+  CHECK 3  DNF (incomplete rounds)  : 3859 players flagged
+  CHECK 4  bye/forfeit games         :  595 games   flagged
+  CHECK 5  high-missing tournaments  :   30 tournaments flagged
+  CHECK 6  rating outliers           :   21 players flagged
 
-  Unique players flagged (any check) : 540
-  Clean players                      : 349 / 889
-  Clean games (excl. bye/forfeit)    : 2247 / 2401
+  Unique players flagged (any check) : 4181
+  Clean players                      : 6072 / 10253
+  Clean games (excl. bye/forfeit)    : 36591 / 37186

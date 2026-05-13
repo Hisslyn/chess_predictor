@@ -9,16 +9,14 @@ Action heuristic (configurable threshold at top of file)
 rating_diff = player_rating - opponent_rating  (positive → player is stronger)
 
 AGGRESSIVE  upset win as underdog          rating_diff < -T  and win
-            decisive vs similar            |rating_diff| <= T and non-draw
-SOLID       draw vs similar                |rating_diff| <= T and draw
+            competitive win vs similar     |rating_diff| <= T and win
+            competitive loss vs similar    |rating_diff| <= T and loss
+SOLID       draw vs stronger               rating_diff < -T  and draw
+            draw vs similar                |rating_diff| <= T and draw
             expected win vs weaker         rating_diff >  T  and win
-            solid draw vs stronger         rating_diff < -T  and draw
-PASSIVE     missed win vs weaker           rating_diff >  T  and draw
-            unexpected loss vs weaker      rating_diff >  T  and loss
             expected loss vs stronger      rating_diff < -T  and loss
-
-Priority when cases overlap: PASSIVE > SOLID > AGGRESSIVE
-(e.g. loss as underdog is PASSIVE, not AGGRESSIVE "upset loss")
+PASSIVE     missed win vs weaker           rating_diff >  T  and draw
+            loss vs weaker                 rating_diff >  T  and loss
 
 Outputs: data/processed/features_labeled.csv
 """

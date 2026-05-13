@@ -11,11 +11,11 @@ Imagine you're rated 2500, it's round 4 of 7, you're leading with 2.5 points out
 
 This tool looks at your exact situation — your rating, your opponent's rating, what round it is, how you're doing in the tournament so far, and whether you have white or black — and gives you a concrete recommendation:
 
-> **Play SOLID.**
+> **Play SOLID.** (marginal confidence — margin: 1.4 pts)
 > Predicted tournament performance with each approach:
-> solid = 2540 · aggressive = 2510 · passive = 2485
+> solid = 2510 · aggressive = 2509 · passive = 2481
 
-The number shown (e.g. 2540) is your *predicted performance rating* — a measure of how strong you played across the whole tournament, based on who you beat and who beat you. The tool picks the strategy that is predicted to produce the highest performance rating by the end of the event.
+The number shown (e.g. 2510) is your *predicted performance rating* — a measure of how strong you played across the whole tournament, based on who you beat and who beat you. The tool picks the strategy that is predicted to produce the highest performance rating by the end of the event.
 
 The three strategies it considers:
 
@@ -53,7 +53,7 @@ That sounds like a lot — but compare it to simpler methods:
 
 The model reduces prediction error by about **74 points** versus the simplest baseline and **50 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
 
-The model was tuned so that its cross-validated error (tested on data it was partially trained with) was even tighter: **89 rating points**. The gap between that and the 94 on held-out tournaments is small, which tells us the model generalises well — training on 150 tournaments gave it enough variety to avoid the overfitting we saw in earlier runs.
+The model was tuned so that its cross-validated error (tested on data it was partially trained with) was even tighter: **89 rating points**. The gap between that and the 94 on held-out tournaments is small, which tells us the model generalises well — training on 147 tournaments gave it enough variety to avoid the overfitting we saw in earlier runs.
 
 ---
 
@@ -110,7 +110,7 @@ The result also includes a **confidence** field. "Strong" means the recommended 
 
 ## What Data It Learned From
 
-The model was trained on **150 Swiss tournaments** scraped from [chess-results.com](https://www.chess-results.com), covering **10,253 players** and **37,186 games** across 66,594 player-round observations. The data includes tournaments from Germany, Argentina, India, Turkey, Spain, the United Kingdom, and beyond, spanning a wide range of rating levels and event sizes.
+The model was trained on **147 Swiss tournaments** scraped from [chess-results.com](https://www.chess-results.com) (150 were scraped; 3 were dropped during labeling for insufficient data), covering **9,098 players** and **35,728 games** across 66,594 player-round observations. The data includes tournaments from Germany, Argentina, India, Turkey, Spain, the United Kingdom, and beyond, spanning a wide range of rating levels and event sizes.
 
 For each player in each round, the data records their rating, their opponent's rating, their current score, their standing in the event, what color they had, and — crucially — whether their play in that round was closer to aggressive, solid, or passive (determined by how their actual result compared to what Elo math would predict).
 
@@ -120,7 +120,7 @@ The scraping was done automatically: the program searched chess-results.com for 
 
 ## Limitations
 
-- **Training coverage.** 150 tournaments is a meaningful dataset, but it is not exhaustive. Patterns learned from these events may not fully represent every time control, country, or rating band.
+- **Training coverage.** 147 tournaments is a meaningful dataset, but it is not exhaustive. Patterns learned from these events may not fully represent every time control, country, or rating band.
 
 - **The model suggests a *style*, not a *move*.** "Aggressive" means aiming for complex, fighting positions — it doesn't tell you which opening to play or how to handle a specific position. The actual chess is still up to you.
 
@@ -152,5 +152,19 @@ The scraping was done automatically: the program searched chess-results.com for 
 | `data/interim/` | Cleaned database and intermediate files |
 | `data/processed/` | Final dataset used to train the model |
 | `notebooks/` | Interactive analyses and result summaries |
-| `run_pipeline.sh` | One command that runs the entire pipeline from scratch |
+| `run_pipeline.sh` | Runs pipeline steps 2–7 (scrape → train) after discovery is complete |
 | `requirements.txt` | List of Python packages needed to run the project |
+
+## Running the Pipeline
+
+The pipeline has two stages. Run them in order:
+
+```bash
+# Step 1 — discover tournament IDs (writes data/interim/tournament_candidates.csv)
+python src/scrape_discovery.py
+
+# Steps 2–7 — scrape, parse, validate, build features, label, train
+bash run_pipeline.sh
+```
+
+`run_pipeline.sh` requires `tournament_candidates.csv` to exist before it starts.

@@ -6,5 +6,6 @@ tenacity
 sqlalchemy
 xgboost
 scikit-learn
+scipy
 shap
 jupyter

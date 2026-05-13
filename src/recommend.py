@@ -124,7 +124,7 @@ def recommend(
     tournament_avg_rating   : mean starting rating of all players
     tournament_rating_std   : std deviation of starting ratings
     field_size              : number of players in tournament
-    title_encoded           : 0=none, 1=NM, 2=CM/WCM, 3=FM/WFM, 4=IM/WIM, 5=WGM/IM, 6=GM
+    title_encoded           : 0=none, 1=NM, 2=WCM, 3=CM/WFM, 4=FM/WIM, 5=IM/WGM, 6=GM
     avg_opponent_rating_so_far : mean rating of opponents in prior rounds (None → estimated)
     opponent_current_score  : opponent's score entering this round (None → estimated)
 

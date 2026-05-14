@@ -41,19 +41,19 @@ The model has learned from thousands of real tournament games that your performa
 
 ## How Accurate Is It
 
-The model's predictions are off by about **94 rating points** on average when tested on tournaments it had never seen before.
+The model's predictions are off by about **94.3 rating points** on average when tested on tournaments it had never seen before.
 
 That sounds like a lot — but compare it to simpler methods:
 
 | Approach | Average error |
 |---|---|
-| "Just use your rating bracket's historical average" | 168 rating points |
-| "Use Elo math to predict your score" | 145 rating points |
-| **This model** | **94 rating points** |
+| "Just use your rating bracket's historical average" | 168.1 rating points |
+| "Use Elo math to predict your score" | 144.7 rating points |
+| **This model** | **94.3 rating points** |
 
-The model reduces prediction error by about **74 points** versus the simplest baseline and **50 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
+The model reduces prediction error by about **73.8 points** versus the simplest baseline and **50.3 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
 
-The model was tuned so that its cross-validated error (tested on data it was partially trained with) was even tighter: **89 rating points**. The gap between that and the 94 on held-out tournaments is small, which tells us the model generalises well — training on 147 tournaments gave it enough variety to avoid the overfitting we saw in earlier runs.
+The model was tuned so that its cross-validated error (measured on held-out folds the model never trained on) was even tighter: **88.5 rating points**. The gap between that and the 94 on held-out tournaments is small, which tells us the model generalises well — training on 118 tournaments gave it enough variety to avoid the overfitting we saw in earlier runs.
 
 ---
 
@@ -110,7 +110,7 @@ The result also includes a **confidence** field. "Strong" means the recommended 
 
 ## What Data It Learned From
 
-The model was trained on **147 Swiss tournaments** scraped from [chess-results.com](https://www.chess-results.com) (150 were scraped; 3 were dropped during labeling for insufficient data), covering **9,098 players** and **35,728 games** across 66,594 player-round observations. The data includes tournaments from Germany, Argentina, India, Turkey, Spain, the United Kingdom, and beyond, spanning a wide range of rating levels and event sizes.
+The model was built from **147 Swiss tournaments** scraped from [chess-results.com](https://www.chess-results.com) (150 were scraped; 3 were dropped during labeling for insufficient data), covering **9,098 players** and **35,728 games** across the 147 retained tournaments (before unrated-opponent filtering), yielding 66,594 player-round observations. Of those 147, **118 were used for training** and **29 were held out for testing**. The data includes tournaments from Germany, Argentina, India, Turkey, Spain, the United Kingdom, and beyond, spanning a wide range of rating levels and event sizes.
 
 For each player in each round, the data records their rating, their opponent's rating, their current score, their standing in the event, what color they had, and — crucially — whether their play in that round was closer to aggressive, solid, or passive (determined by how their actual result compared to what Elo math would predict).
 

@@ -2,9 +2,9 @@ CHESS.DB VALIDATION REPORT
 Database : data/interim/chess.db
 Thresholds: missing>10%  |z|>3.0
 
-  tournaments            :    150
-  players_in_tournament  :  10253
-  games                  :  37186
+  tournaments            :  150
+  players_in_tournament  :  9098
+  games                  :  35728
 
 ════════════════════════════════════════════════════════════════════════
 CHECK 1 · Missing / zero starting_rating

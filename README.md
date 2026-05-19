@@ -51,7 +51,7 @@ That sounds like a lot — but compare it to simpler methods:
 | "Use Elo math to predict your score" | 144.7 rating points |
 | **This model** | **94.3 rating points** |
 
-The model reduces prediction error by about **73.8 points** versus the simplest baseline and **50.3 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
+The model reduces prediction error by about **73.8 points** versus the simplest baseline and **50.4 points** versus using Elo alone. That means it's genuinely learning something useful from the tournament context — your standing, your opponents, your strategy — beyond what your rating alone can tell you.
 
 The model was tuned so that its cross-validated error (measured on held-out folds the model never trained on) was even tighter: **88.5 rating points**. The gap between that and the 94 on held-out tournaments is small, which tells us the model generalises well — training on 118 tournaments gave it enough variety to avoid the overfitting we saw in earlier runs.
 
@@ -82,7 +82,7 @@ print(result["solid"]["predicted_rp"])       # e.g. 2540.0
 print(result["aggressive"]["predicted_rp"])  # e.g. 2510.0
 print(result["passive"]["predicted_rp"])     # e.g. 2485.0
 print(result["confidence"])                  # "strong" or "marginal"
-print(result["explanation"])                 # plain-language summary of the key factors
+print(result["explanation"])                 # SHAP-based technical summary, e.g. "Recommended SOLID — top 3 drivers: player_rating 2500.00 (shap +405.5), ..."
 ```
 
 **What each input means:**

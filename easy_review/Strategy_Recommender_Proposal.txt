@@ -1,0 +1,48 @@
+Context-Aware Strategy Recommendation in Swiss Chess Tournaments Using Machine Learning
+
+Capstone Proposal
+
+1. Introduction
+
+The Elo rating system [1] provides a calibrated probability for the outcome of a single chess game given two ratings, and remains the foundation of competitive chess. In Swiss-system tournaments [2], however, players accumulate scores over several rounds and are paired adaptively against opponents on similar scores. A player's final standing therefore depends not only on per-game probabilities but on the unfolding tournament context — current standing, average opponent strength so far, rounds remaining, color balance, and the structural pairing dynamics of the field.
+
+Strategic stance is also part of this picture. Experienced players adapt their approach round-by-round: pressing for a win when the tournament situation rewards risk, consolidating with a solid line against a stronger opponent, or accepting a quiet draw when standing already permits it. These choices are routinely made by competitors and coaches, but rarely modeled quantitatively.
+
+This capstone proposes a context-aware strategy recommender for Swiss-system chess tournaments. The system maps a player's current situation and a candidate action — aggressive, solid, or passive — to a predicted end-of-tournament performance rating (Rp), and surfaces the action that maximizes that prediction together with the features driving it. The intent is a decision aid for the player, not an autonomous decision-maker.
+
+2. Literature Review
+
+Existing machine-learning work on chess has focused largely on per-game outcome classification from rating and metadata features [3]. These approaches treat each game as an independent prediction problem and do not condition on tournament-level state such as current standing, color balance, or remaining rounds.
+
+The Elo system [1] itself provides a strong rating-based baseline, but is built on the single-game expectation assumption and does not exploit accumulating within-tournament information. The Swiss pairing mechanism [2] further introduces adaptive opponent selection that breaks game-level independence, but Elo does not model this either.
+
+XGBoost [4] is the established gradient-boosted tree method for tabular regression with mixed feature types — static identity, tournament context, and prior-round state — and is a natural fit for the present setting. Tree boosting is also well-suited to the SHAP attribution framework used below, which is required to expose the recommender's reasoning rather than its output alone.
+
+Work on human–AI joint decision making [5] indicates that interpretable output — recommendations paired with the reasons behind them — outperforms opaque predictions when the end user retains decision authority. This shapes how the recommender is exposed: as a per-round suggestion with SHAP-derived drivers, scored against the player's own judgment.
+
+3. Problem Statement
+
+The research question is whether the round-by-round strategic stance a player adopts — aggressive, solid, or passive — carries learnable signal for tournament-level outcomes once rating information is controlled for.
+
+The framing has two parts. First, prediction: does context beyond rating reduce error in Rp prediction. Second, recommendation: can the trained model be inverted into a per-round action recommender by re-scoring the situation under each candidate action and returning the one with the highest predicted Rp.
+
+4. Methods
+
+Data. 150 FIDE-rated Swiss tournaments are scraped from chess-results.com, yielding 9,098 players and 35,728 games. Tournaments cluster in December 2025; the largest federations represented are India, Germany, Argentina, Turkey, Spain, and the United Kingdom. Field sizes range from 30 to 150 players (mean 68.4) and rounds per tournament from 6 to 11. A single pipeline was built to discover candidate events, download pairings and crosstables, parse them to SQLite, validate, engineer features, assign action labels, and train.
+
+Recommender. For inference, four
+
+Evidence of effectiveness. The methodology has been implemented and produces results consistent with the framing above. On the 29 held-out test tournaments (12,648 rows), Baseline 0 reached MAE = 168.1 Elo points and Baseline 1 reached MAE = 144.7. The XGBoost model reached MAE = 94.3 — a 50.4
+
+References
+
+[1] A. E. Elo, The Rating of Chess Players, Past and Present. New York, NY, USA: Arco Publishing, 1978.
+
+[2] C. Hua, "The Swiss tournament model," Undergraduate thesis, Wharton School, Univ. Pennsylvania, Philadelphia, PA, USA, 2017.
+
+[3] K. Samara, A. Antreassian, M. Klug, and M. S. Hasan, "Machine learning approaches for classifying chess game outcomes: A comparative analysis of player ratings and game dynamics," Electronics, vol. 15, no. 1, p. 1, 2025, doi: 10.3390/electronics15010001.
+
+[4] T. Chen and C. Guestrin, "XGBoost: A scalable tree boosting system," in Proc. 22nd ACM SIGKDD Int. Conf. Knowl. Discov. Data Min., San Francisco, CA, USA, 2016, pp. 785–794, doi: 10.1145/2939672.2939785.
+
+[5] K. Inkpen et al., "Advancing human–AI complementarity: The impact of user expertise and algorithmic tuning on joint decision making," ACM Trans. Comput.-Hum. Interact., vol. 30, no. 5, Art. no. 71, 2023, doi: 10.1145/3534561.
+

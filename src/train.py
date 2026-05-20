@@ -8,7 +8,7 @@ Split: 80/20 by tournament_id (no row-level leakage).
 
 Models
 ──────
-Baseline 0  – tournament-mean Rp by rating bracket (<1500, 1500-1800, 1800-2100, 2100+)
+Baseline 0  – bracket-mean Rp (<1500, 1500-1800, 1800-2100, 2100+)
 Baseline 1  – Elo expected-score formula: Rp ≈ avg_opp_rating + dp(expected_score_pct)
 XGBoost     – all features + action one-hots, tuned via GroupKFold(5) CV
 
@@ -27,6 +27,8 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import GroupKFold, RandomizedSearchCV
 from xgboost import XGBRegressor
 
+from fide_utils import fide_dp as _dp
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s  %(levelname)-8s  %(message)s",
@@ -38,31 +40,6 @@ log = logging.getLogger(__name__)
 DATA_PATH   = Path("data/processed/features_labeled.csv")
 MODEL_PATH  = Path("models/xgb_rp_predictor.pkl")
 REPORT_PATH = Path("models/training_report.txt")
-
-# ── FIDE dp lookup (see build_features.py) ────────────────────────────────────
-_FIDE_DP = {
-    100: 800,  99: 677,  98: 589,  97: 538,  96: 501,  95: 470,
-     94: 444,  93: 422,  92: 401,  91: 383,  90: 366,  89: 351,
-     88: 336,  87: 322,  86: 309,  85: 296,  84: 284,  83: 273,
-     82: 262,  81: 251,  80: 240,  79: 230,  78: 220,  77: 211,
-     76: 202,  75: 193,  74: 184,  73: 175,  72: 166,  71: 158,
-     70: 149,  69: 141,  68: 133,  67: 125,  66: 117,  65: 110,
-     64: 102,  63:  95,  62:  87,  61:  80,  60:  72,  59:  65,
-     58:  57,  57:  50,  56:  43,  55:  36,  54:  29,  53:  21,
-     52:  14,  51:   7,  50:   0,  49:  -7,  48: -14,  47: -21,
-     46: -29,  45: -36,  44: -43,  43: -50,  42: -57,  41: -65,
-     40: -72,  39: -80,  38: -87,  37: -95,  36: -102,  35: -110,
-     34: -117,  33: -125,  32: -133,  31: -141,  30: -149,  29: -158,
-     28: -166,  27: -175,  26: -184,  25: -193,  24: -202,  23: -211,
-     22: -220,  21: -230,  20: -240,  19: -251,  18: -262,  17: -273,
-     16: -284,  15: -296,  14: -309,  13: -322,  12: -336,  11: -351,
-     10: -366,   9: -383,   8: -401,   7: -422,   6: -444,   5: -470,
-      4: -501,   3: -538,   2: -589,   1: -677,   0: -800,
-}
-
-def _dp(pct: float) -> float:
-    p = max(0, min(100, int(round(pct))))
-    return float(_FIDE_DP[p])
 
 
 # ── feature columns used by XGBoost ───────────────────────────────────────────
@@ -200,6 +177,7 @@ def train_xgboost(
         n_jobs=-1,
         verbosity=0,
         tree_method="hist",
+        importance_type="gain",
     )
 
     search = RandomizedSearchCV(
@@ -366,7 +344,7 @@ def main() -> None:
                   f"B0={mae(y_t,p_b0):.1f}  B1={mae(y_t,p_b1):.1f}  XGB={mae(y_t,p_xg):.1f}")
         print()
         print("  Possible causes:")
-        print("  - Only 2 test tournaments → high variance in MAE estimate")
+        print(f"  - Only {len(test_tids)} test tournaments → high variance in MAE estimate")
         print("  - XGBoost overfit to train tournaments (try more regularisation)")
         print("  - Baselines strong when test-tournament Rp distribution matches train brackets")
 

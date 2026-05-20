@@ -1,0 +1,123 @@
+               **Verification log — Strategy Recommender Paper**                
+Every numeric and factual claim in the draft, with the file and line/section it was pulled from. Sources cite the project repository (rooted at the connected workspace folder) unless otherwise noted. Use this list to spot-check.
+## **Dataset and pipeline**
+
++------------------------------------------+----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Claim in paper**                       | **Value**                                    | **Source file & location**                                                                                                                                                                   |
++------------------------------------------+----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Tournaments scraped                      | 150                                          |                                                                                                                                                                                              |
+| Players                                  | 9,098                                        | data/interim/validation_report.txt, line 7; final_report.ipynb cell-3                                                                                                                        |
+| Games                                    | 35,728                                       | data/interim/validation_report.txt, line 8; final_report.ipynb cell-3                                                                                                                        |
+| Player-round observations after labeling | 66,594                                       | data/processed/features_labeled.csv (rows); final_report.ipynb cell-3 ("66594 labeled rows")                                                                                                 |
+| Tournaments surviving labeling           | 147                                          | Computed from features_labeled.csv unique tournament_id; explained by label.py dropping rows with NaN rating_diff (lines 144–149)                                                            |
+| Field-size range and mean                | 30–150 players, mean 68.4                    | Computed from chess.db tournaments table (n_players column)                                                                                                                                  |
+| Rounds per tournament range              | 6–11                                         | Computed from chess.db tournaments.n_rounds column                                                                                                                                           |
+| Sampling period                          | December 2024 – December 2025                | chess.db tournaments.start_date, calendar min 07.12.2024 max 31.12.2025 (72 tournaments in 2024, 78 in 2025); string MIN was reported as 06.12.2025 due to lexicographic DD.MM.YYYY ordering |
+| Top federations by player count          | IND, GER, ARG, TUR, ESP, GBR                 | Computed from chess.db players_in_tournament.federation grouping                                                                                                                             |
+| Action class distribution                | solid 63.9%, aggressive 22.3%, passive 13.9% | Computed from features_labeled.csv action column counts; consistent with label.py heuristic                                                                                                  |
++------------------------------------------+----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+## **Modeling setup**
+
++------------------------------+-----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Claim in paper**           | **Value**                                                                         | **Source file & location**                                                                                                         |
++------------------------------+-----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Number of features per row   | 25                                                                                | src/train.py FEATURE_COLS list (lines 46–58); src/recommend.py FEATURE_COLS (lines 30–42)                                          |
+| Performance-rating formula   | Rp = avg_opp_rating + dp(score%)                                                  | src/build_features.py compute_performance_ratings (lines 80–121); _fide_dp imported from fide_utils.py (build_features.py line 30) |
+| Action labelling threshold T | 100 Elo points                                                                    | src/label.py THRESHOLD (line 39)                                                                                                   |
+| No-leakage construction      |                                                                                   | src/build_features.py prior filter (line 234), rows.append (lines 263–294) and module docstring (lines 12–17)                      |
+| Train/test split             | 80/20 by tournament_id, random_state = 42                                         | src/train.py load_and_split (lines 73–94)                                                                                          |
+| Train tournaments / rows     | 118 tournaments, 53,946 rows                                                      | models/training_report.txt, lines 6, 8                                                                                             |
+| Test tournaments / rows      | 29 tournaments, 12,648 rows                                                       | models/training_report.txt, lines 7, 8                                                                                             |
+| Cross-validation strategy    | GroupKFold(5) on tournament_id, RandomizedSearchCV n_iter = 40, scoring = neg-MAE | src/train.py train_xgboost (lines 141–203)                                                                                         |
++------------------------------+-----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+
+
+## **Model performance**
+
++-----------------------------------------+------------------+----------------------------------------------------------+
+| **Claim in paper**                      | **Value**        | **Source file & location**                               |
++-----------------------------------------+------------------+----------------------------------------------------------+
+| Baseline 0 MAE (rating-bracket mean Rp) | 168.1            | models/training_report.txt, line 12                      |
+| Baseline 1 MAE (Elo expected score)     | 144.7            | models/training_report.txt, line 13                      |
+| XGBoost test MAE                        | 94.3             | models/training_report.txt, line 14                      |
+| XGBoost best CV MAE                     | 88.5             | models/training_report.txt, line 14 ("best CV MAE 88.5") |
+| Improvement vs Baseline 0               | +73.8 Elo points | models/training_report.txt, line 16                      |
+| Improvement vs Baseline 1               | +50.4 Elo points | models/training_report.txt, line 16                      |
+| Reduction vs Baseline 1 (35%)           |                  | Computed from training_report.txt MAEs                   |
+| CV-to-test gap                          | 5.8 Elo points   |                                                          |
++-----------------------------------------+------------------+----------------------------------------------------------+
+
+
+## **Selected hyperparameters**
+
++--------------------+-----------+-------------------------------------+
+| **Claim in paper** | **Value** | **Source file & location**          |
++--------------------+-----------+-------------------------------------+
+| n_estimators       | 136       | models/training_report.txt, line 32 |
+| max_depth          | 6         | models/training_report.txt, line 30 |
+| learning_rate      | 0.0458    | models/training_report.txt, line 29 |
+| subsample          | 0.7115    | models/training_report.txt, line 35 |
+| colsample_bytree   | 0.8119    | models/training_report.txt, line 27 |
+| min_child_weight   | 5         | models/training_report.txt, line 31 |
+| gamma              | 0.1209    | models/training_report.txt, line 28 |
+| reg_alpha          | 0.8826    | models/training_report.txt, line 33 |
+| reg_lambda         | 0.8774    | models/training_report.txt, line 34 |
++--------------------+-----------+-------------------------------------+
+
+
+## **Feature importance (gain)**
+
++--------------------------------+-----------+---------------------------------------------------------------------------------------+
+| **Claim in paper**             | **Value** | **Source file & location**                                                            |
++--------------------------------+-----------+---------------------------------------------------------------------------------------+
+| title_encoded                  | 0.3837    | models/training_report.txt, line 39                                                   |
+| player_rating                  | 0.3420    | models/training_report.txt, line 40                                                   |
+| Sum of top-2 identity features |           | Computed: (0.3837 + 0.3420) / sum of all importances; training_report.txt lines 39–53 |
+| score_delta                    | 0.0465    | models/training_report.txt, line 41                                                   |
+| avg_opponent_rating_so_far     | 0.0273    | models/training_report.txt, line 42                                                   |
+| rating_gap_to_field_avg        | 0.0238    | models/training_report.txt, line 43                                                   |
+| tournament_avg_rating          | 0.0195    | models/training_report.txt, line 44                                                   |
+| action_passive                 | 0.0146    | models/training_report.txt, line 46                                                   |
+| action_aggressive              | 0.0116    | models/training_report.txt, line 47                                                   |
+| opponent_rating                | 0.0115    | models/training_report.txt, line 48                                                   |
+| action_solid                   | 0.0113    | models/training_report.txt, line 49                                                   |
++--------------------------------+-----------+---------------------------------------------------------------------------------------+
+
+
+## **SHAP / direction claims**
+
++------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Claim in paper**                       | **Value**   | **Source file & location**                                                                                                                                                                                                                                   |
++------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                          | Qualitative | notebooks/shap_summary.png (Figure 3 in paper) — supported also by the per-action gain ranking (action_passive > aggressive > solid in training_report.txt) and recommender scenarios in final_report.ipynb cell-12 (e.g., S4: action_aggressive shap +45.0) |
+| score_delta is leading dynamic predictor | 0.0465 gain | models/training_report.txt, line 41 (top dynamic feature after the two identity features)                                                                                                                                                                    |
++------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+## **Recommender scenarios**
+
++---------------------------------------------------+-------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| **Claim in paper**                                | **Value**                                 | **Source file & location**                                                                                             |
++---------------------------------------------------+-------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+| S4 1600/1900 round 3/9 +2 streak: recommendation  | AGGRESSIVE, strong confidence             |                                                                                                                        |
+| S4 predicted Rp by action                         | aggressive 1828, solid 1714, passive 1736 | notebooks/final_report.ipynb cell-12 output ("--- S4 ... Aggressive=1828  Solid=1714  Passive=1736")                   |
+| S3 must-win 2200/2000 final round: recommendation | SOLID, strong confidence                  | notebooks/final_report.ipynb cell-12 output ("S3 — Must-win ... SOLID (2032)")                                         |
+| S3 dominant SHAP driver                           |                                           | notebooks/final_report.ipynb cell-12 output ("Recommended SOLID — top 3 drivers: ... score_delta -1.56 (shap -161.8)") |
+| Confidence threshold (strong/marginal)            |                                           | src/recommend.py recommend (lines 211–213)                                                                             |
++---------------------------------------------------+-------------------------------------------+------------------------------------------------------------------------------------------------------------------------+
+
+
+## **References**
+
++-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Reference**                                   | **Source location**                                                                                                                                    |
++-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Elo (1978) — Elo rating system foundation       | References/1978-elo-theratingofchessplayerspastandpresent.pdf                                                                                          |
+| Hua (2017) — Swiss tournament model             | References/The Swiss Tournament Model.pdf, Wharton Research Scholars undergraduate thesis (cover page)                                                 |
+| Chen & Guestrin (2016) — XGBoost                | References/XGBoost A Scalable Tree Boosting System.pdf, KDD '16 (page 1, header lists authors)                                                         |
+| Inkpen et al. (2023) — human–AI complementarity | References/Advancing Human-AI Complementarity.pdf, ACM TOCHI vol. 30 issue 5 article 71, DOI 10.1145/3534561 (page 1 footer)                           |
+| Samara et al. (2025) — chess-outcome ML         | References/Machine Learning Approaches for Classifying Chess Game Outcomes.pdf, Electronics 15(1):1, DOI 10.3390/electronics15010001 (page 1 metadata) |
++-------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+

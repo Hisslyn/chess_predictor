@@ -27,6 +27,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from fide_utils import fide_dp as _fide_dp
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s  %(levelname)-8s  %(message)s",
@@ -36,39 +38,6 @@ log = logging.getLogger(__name__)
 
 DB_PATH  = Path("data/interim/chess.db")
 OUT_PATH = Path("data/processed/features.csv")
-
-# ── FIDE dp lookup table ───────────────────────────────────────────────────────
-# Maps integer score percentage (0..100) → rating difference dp.
-# Source: FIDE Handbook B.02 Annex 2.
-_FIDE_DP = {
-    100: 800, 99: 677, 98: 589, 97: 538, 96: 501, 95: 470,
-     94: 444,  93: 422,  92: 401,  91: 383,  90: 366,
-     89: 351,  88: 336,  87: 322,  86: 309,  85: 296,
-     84: 284,  83: 273,  82: 262,  81: 251,  80: 240,
-     79: 230,  78: 220,  77: 211,  76: 202,  75: 193,
-     74: 184,  73: 175,  72: 166,  71: 158,  70: 149,
-     69: 141,  68: 133,  67: 125,  66: 117,  65: 110,
-     64: 102,  63:  95,  62:  87,  61:  80,  60:  72,
-     59:  65,  58:  57,  57:  50,  56:  43,  55:  36,
-     54:  29,  53:  21,  52:  14,  51:   7,  50:   0,
-     49:  -7,  48: -14,  47: -21,  46: -29,  45: -36,
-     44: -43,  43: -50,  42: -57,  41: -65,  40: -72,
-     39: -80,  38: -87,  37: -95,  36: -102,  35: -110,
-     34: -117,  33: -125,  32: -133,  31: -141,  30: -149,
-     29: -158,  28: -166,  27: -175,  26: -184,  25: -193,
-     24: -202,  23: -211,  22: -220,  21: -230,  20: -240,
-     19: -251,  18: -262,  17: -273,  16: -284,  15: -296,
-     14: -309,  13: -322,  12: -336,  11: -351,  10: -366,
-      9: -383,   8: -401,   7: -422,   6: -444,   5: -470,
-      4: -501,   3: -538,   2: -589,   1: -677,   0: -800,
-}
-
-
-def _fide_dp(pct: float) -> float:
-    """FIDE dp(): convert score percentage (0-100 float) to rating diff."""
-    p = int(round(pct))
-    p = max(0, min(100, p))
-    return float(_FIDE_DP[p])
 
 
 def _elo_expected(player_rtg: float, opp_rtg: float) -> float:

@@ -108,25 +108,35 @@ def recommend(
     title_encoded: int = 0,
     avg_opponent_rating_so_far: float | None = None,
     opponent_current_score: float | None = None,
+    seed_number: int | None = None,
+    prior_opponent_ratings: list[float] | None = None,
+    color_balance: int = 0,
 ) -> dict:
     """
     Recommend a strategic action for the current round.
 
     Parameters
     ──────────
-    player_rating           : player's current FIDE rating
-    opponent_rating         : opponent's FIDE rating
-    round_num               : current round number (1-indexed)
-    n_rounds                : total rounds in tournament
-    current_score           : player's score entering this round (e.g. 2.5)
-    gap_to_leader           : current_score − leader_score (0 = leading, negative = behind)
-    playing_white           : 1 if player has white, 0 if black
-    tournament_avg_rating   : mean starting rating of all players
-    tournament_rating_std   : std deviation of starting ratings
-    field_size              : number of players in tournament
-    title_encoded           : 0=none, 1=NM, 2=WCM, 3=CM/WFM, 4=FM/WIM, 5=IM/WGM, 6=GM
-    avg_opponent_rating_so_far : mean rating of opponents in prior rounds (None → estimated)
-    opponent_current_score  : opponent's score entering this round (None → estimated)
+    player_rating              : player's current FIDE rating
+    opponent_rating            : opponent's FIDE rating
+    round_num                  : current round number (1-indexed)
+    n_rounds                   : total rounds in tournament
+    current_score              : player's score entering this round (e.g. 2.5)
+    gap_to_leader              : current_score − leader_score (0 = leading, negative = behind)
+    playing_white              : 1 if player has white, 0 if black
+    tournament_avg_rating      : mean starting rating of all players
+    tournament_rating_std      : std deviation of starting ratings
+    field_size                 : number of players in tournament
+    title_encoded              : 0=none, 1=NM, 2=WCM, 3=CM/WFM, 4=FM/WIM, 5=IM/WGM, 6=GM
+    avg_opponent_rating_so_far : mean rating of opponents in prior rounds (None → 0.0)
+    opponent_current_score     : opponent's score entering this round (None → estimated)
+    seed_number                : player's seed number (1 = top seed); when provided,
+                                 seed_percentile matches build_features.py exactly
+    prior_opponent_ratings     : list of opponent ratings from all prior rounds; when
+                                 provided, expected_score_so_far is the exact per-game
+                                 Elo sum used in training
+    color_balance              : cumulative color balance from prior rounds
+                                 (+1 per white game, −1 per black game)
 
     Returns
     ───────
@@ -140,27 +150,32 @@ def recommend(
     expected_score_this_game = _elo_expected(player_rating, opponent_rating)
     rounds_remaining         = n_rounds - round_num
     rating_gap_to_field_avg  = player_rating - tournament_avg_rating
-    seed_pct                 = _seed_percentile_est(
-                                   player_rating, tournament_avg_rating, tournament_rating_std)
 
-    # avg_opponent_rating_so_far: round 1 → 0.0 (matches training imputation);
-    # later rounds → tournament_avg_rating as neutral estimate
+    # seed_percentile: use exact rank formula from build_features.py when seed_number
+    # is known; fall back to normal-CDF approximation otherwise
+    if seed_number is not None:
+        seed_pct = (field_size - seed_number) / max(field_size - 1, 1)
+    else:
+        seed_pct = _seed_percentile_est(player_rating, tournament_avg_rating, tournament_rating_std)
+
+    # avg_opponent_rating_so_far: round 1 → 0.0 (matches training imputation)
     if avg_opponent_rating_so_far is None:
-        avg_opponent_rating_so_far = 0.0 if round_num == 1 else tournament_avg_rating
+        avg_opponent_rating_so_far = 0.0
 
-    # expected_score_so_far over prior rounds
-    rounds_done         = round_num - 1
-    exp_per_round       = _elo_expected(player_rating, avg_opponent_rating_so_far) \
-                          if avg_opponent_rating_so_far > 0 else 0.5
-    expected_score_so_far = rounds_done * exp_per_round
-    score_delta           = current_score - expected_score_so_far
+    # expected_score_so_far: sum individual Elo expectations per prior game,
+    # matching build_features.py exactly when prior_opponent_ratings is supplied
+    rounds_done = round_num - 1
+    if prior_opponent_ratings is not None:
+        expected_score_so_far = sum(_elo_expected(player_rating, r) for r in prior_opponent_ratings)
+    else:
+        exp_per_round = _elo_expected(player_rating, avg_opponent_rating_so_far) \
+                        if avg_opponent_rating_so_far > 0 else 0.5
+        expected_score_so_far = rounds_done * exp_per_round
+    score_delta = current_score - expected_score_so_far
 
     # current_rank estimate
     current_rank = _estimate_current_rank(current_score, gap_to_leader,
                                            field_size, round_num)
-
-    # color_balance: unknown → 0 (neutral/balanced)
-    color_balance = 0
 
     # opponent_current_score: estimate as elo-weighted expected score over prior rounds
     if opponent_current_score is None:
@@ -232,6 +247,7 @@ def recommend(
         "recommended": _ACTIONS[best_idx],
         "confidence":  confidence,
         "explanation": explanation,
+        "score_delta": round(score_delta, 4),
     }
 
 
@@ -263,7 +279,7 @@ def _pretty_print(scenario: str, kwargs: dict, result: dict) -> str:
         f"Recommendation: {rec}. "
         f"Predicted Rp: solid={rp_s:.0f}, aggressive={rp_a:.0f}, passive={rp_p:.0f}.",
         f"Confidence: {conf}.",
-        f"Key factors: score_delta {kwargs.get('_score_delta', 'n/a')}, "
+        f"Key factors: score_delta {result.get('score_delta', 'n/a')}, "
         f"gap_to_leader {gap:+.1f}, rating_diff {rd:+.0f}.",
         f"[{exp}]",
     ]

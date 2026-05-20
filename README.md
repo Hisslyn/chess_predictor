@@ -11,7 +11,7 @@ Imagine you're rated 2500, it's round 4 of 7, you're leading with 2.5 points out
 
 This tool looks at your exact situation — your rating, your opponent's rating, what round it is, how you're doing in the tournament so far, and whether you have white or black — and gives you a concrete recommendation:
 
-> **Play SOLID.** (marginal confidence — margin: 1.4 pts)
+> **Play SOLID.** (marginal confidence — margin: 1 pt)
 > Predicted tournament performance with each approach:
 > solid = 2510 · aggressive = 2509 · passive = 2481
 

@@ -28,11 +28,11 @@ The framing has two parts. First, prediction: does context beyond rating reduce 
 
 4. Methods
 
-Data. 150 FIDE-rated Swiss tournaments are scraped from chess-results.com, yielding 9,098 players and 35,728 games. Tournaments cluster in December 2025; the largest federations represented are India, Germany, Argentina, Turkey, Spain, and the United Kingdom. Field sizes range from 30 to 150 players (mean 68.4) and rounds per tournament from 6 to 11. A single pipeline was built to discover candidate events, download pairings and crosstables, parse them to SQLite, validate, engineer features, assign action labels, and train.
+Data. 150 FIDE-rated Swiss tournaments are scraped from chess-results.com, yielding 9,098 players and 35,728 games. Tournaments span December 2024 and December 2025; the largest federations represented are India, Germany, Argentina, Turkey, Spain, and the United Kingdom. Field sizes range from 30 to 150 players (mean 68.4) and rounds per tournament from 6 to 11. A single pipeline was built to discover candidate events, download pairings and crosstables, parse them to SQLite, validate, engineer features, assign action labels, and train.
 
-Recommender. For inference, four
+Recommender. For inference, three feature vectors are constructed — one per candidate action (aggressive, solid, passive) — each identical except for the action one-hot columns. The trained XGBoost model is scored on all three; the action yielding the highest predicted Rp is returned as the recommendation together with SHAP-derived top feature attributions for the recommended action.
 
-Evidence of effectiveness. The methodology has been implemented and produces results consistent with the framing above. On the 29 held-out test tournaments (12,648 rows), Baseline 0 reached MAE = 168.1 Elo points and Baseline 1 reached MAE = 144.7. The XGBoost model reached MAE = 94.3 — a 50.4
+Evidence of effectiveness. The methodology has been implemented and produces results consistent with the framing above. On the 29 held-out test tournaments (12,648 rows), Baseline 0 reached MAE = 168.1 Elo points and Baseline 1 reached MAE = 144.7. The XGBoost model reached MAE = 94.3 — a 50.4 Elo-point improvement over Baseline 1 and a 73.8 Elo-point improvement over Baseline 0.
 
 References
 
